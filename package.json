@@ -1,0 +1,15 @@
+{
+  "name": "autoshop-agent",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "dev:dashboard": "pnpm --filter @autoshop-agent/dashboard dev",
+    "dev:backend": "pnpm --filter @autoshop-agent/backend dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "format": "pnpm -r format"
+  }
+}
+
