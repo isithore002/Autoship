@@ -6,6 +6,8 @@ import { env } from "./config/env";
 import { runsRouter } from "./api/runs";
 import { artifactsRouter } from "./api/artifacts";
 import { logsRouter } from "./api/logs";
+import { previewRouter } from "./api/preview";
+import { healthRouter } from "./api/health";
 
 const app = express();
 
@@ -20,6 +22,11 @@ app.get("/health", (req, res) => {
 app.use("/api/runs", runsRouter);
 app.use("/api/runs", artifactsRouter);
 app.use("/api/runs", logsRouter);
+app.use("/preview", previewRouter);
+app.use("/api/health", healthRouter);
+
+// Mount preview router for serving generated app builds
+app.use("/preview", previewRouter);
 
 app.listen(env.PORT, () => {
   console.log(`✅ AutoShip backend running on http://localhost:${env.PORT}`);

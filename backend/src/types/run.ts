@@ -31,7 +31,7 @@ export type RunArtifacts = {
   installReport?: string;
 };
 
-export type Run = {
+export interface Run {
   id: string;
   goal: string;
   template: "nextjs_basic" | "nextjs_firebase" | "mern_crud";
@@ -43,12 +43,10 @@ export type Run = {
   steps: RunStep[];
   liveLogs: string[];
 
-  deployedUrl?: string;
-  
-  // Live preview (dev server)
-  previewUrl?: string;
-  previewPid?: number;
-  
+  deployedUrl?: string; // Final deployed URL
+  previewUrl?: string; // Live dev server URL during build
+  previewPid?: number; // PID of the dev server process
+
   artifacts: RunArtifacts;
 
   error?: string;
