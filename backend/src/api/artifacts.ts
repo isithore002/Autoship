@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router, type Router as RouterType } from "express";
 import fs from "node:fs";
 import archiver from "archiver";
 import { artifactsDirForRun } from "../artifacts/artifactWriter";
 
-export const artifactsRouter = Router();
+export const artifactsRouter: RouterType = Router();
 
 /**
  * GET /api/runs/:id/artifacts.zip

@@ -22,10 +22,13 @@ export type RunStep = {
 
 export type RunArtifacts = {
   planJson?: string; // JSON string
+  lintReport?: string;
   testReport?: string;
   buildLog?: string;
+  buildReport?: string;
   deployUrl?: string;
   diffPatch?: string;
+  installReport?: string;
 };
 
 export type Run = {
@@ -41,6 +44,11 @@ export type Run = {
   liveLogs: string[];
 
   deployedUrl?: string;
+  
+  // Live preview (dev server)
+  previewUrl?: string;
+  previewPid?: number;
+  
   artifacts: RunArtifacts;
 
   error?: string;

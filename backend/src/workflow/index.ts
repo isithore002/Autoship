@@ -1,8 +1,8 @@
 import { env } from "../config/env";
-import { simulationRunner } from "./simRunner";
+import { executionRunner } from "./simRunner";
 import { realRunner } from "./realRunner";
 
 export function getRunner() {
-  console.log(`[Runner] Using ${env.SIMULATION_MODE ? "simulationRunner" : "realRunner"}`);
-  return env.SIMULATION_MODE ? simulationRunner : realRunner;
+  console.log(`[Runner] Using ${env.SIMULATION_MODE ? "executionRunner" : "realRunner (Gemini-powered)"}`);
+  return env.SIMULATION_MODE ? executionRunner : realRunner;
 }

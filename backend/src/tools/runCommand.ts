@@ -12,6 +12,7 @@ export interface RunCommandResult {
   durationMs: number;
   stdout: string;
   stderr: string;
+  output: string;
 }
 
 export async function runCommand(command: string, options: RunCommandOptions = {}): Promise<RunCommandResult> {
@@ -76,6 +77,7 @@ export async function runCommand(command: string, options: RunCommandOptions = {
         durationMs: Date.now() - start,
         stdout: stdoutAggregate,
         stderr: stderrAggregate,
+        output: `${stdoutAggregate}${stderrAggregate}`,
       });
     });
   });

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import { env } from "./config/env";
 import { runsRouter } from "./api/runs";
 import { artifactsRouter } from "./api/artifacts";
+import { logsRouter } from "./api/logs";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/health", (req, res) => {
 
 app.use("/api/runs", runsRouter);
 app.use("/api/runs", artifactsRouter);
+app.use("/api/runs", logsRouter);
 
 app.listen(env.PORT, () => {
   console.log(`✅ AutoShip backend running on http://localhost:${env.PORT}`);
