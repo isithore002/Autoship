@@ -1,0 +1,11 @@
+{
+  "name": "autoship-template",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo 'No tests yet' && exit 0",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
