@@ -6,7 +6,7 @@ export type StepStatus =
 
 export interface WorkflowStep {
   
-  id: "npm" | "pnpm" | "yarn"
+  id: string
 
   args: string[]
 

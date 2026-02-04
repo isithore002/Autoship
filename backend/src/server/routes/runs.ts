@@ -5,6 +5,8 @@ import { Run } from "../../runs/runTypes"
 import { startWorkflow } from "../../workflow/workflowEngine"
 import { plannerAgent } from "../../agents/plannerAgent"
 import { env } from "../../config/env"
+import path from "path"
+import { scaffoldingAgent } from "../../agents/scaffoldingAgent"
 
 const router: Router = express.Router()
 
@@ -12,10 +14,22 @@ router.post("/", async (req, res) => {
   const { prompt = "Build the application", template = "", userId } = req.body
 
   const runId = nanoid()
+  const time = Date.now()
+  const workspace = path.join(
+    env.ARTIFACT_ROOT,
+    "runs",
+    runId,
+    "workspace"
+  )
+
+  const scaffold = await scaffoldingAgent(workspace, prompt)
+  if (!scaffold.success) {
+    return res.status(500).json({ error: "Scaffolding failed" })
+  }
 
   const planResult = await plannerAgent(prompt, {
     runId,
-    workspace: "",
+    workspace,
     artifactRoot: env.ARTIFACT_ROOT,
     logs: []
   })
@@ -40,6 +54,7 @@ router.post("/", async (req, res) => {
 
     timelineSteps: planResult.output.map(step => ({
       id: step.id,
+      args: step.args, 
       label: step.label,
       status: "pending",
       logs: [],
@@ -55,7 +70,7 @@ router.post("/", async (req, res) => {
 
   runStore.create(run)
 
-  res.json({ run })
+  res.json({ runId: run.id })
 })
 
 router.post("/:id/start", async (req, res) => {
@@ -68,6 +83,7 @@ router.post("/:id/start", async (req, res) => {
   startWorkflow(run.id)
   res.json({ ok: true })
 })
+
 
 router.get("/:id", (req, res) => {
   const run = runStore.get(req.params.id)

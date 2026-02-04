@@ -4,6 +4,7 @@ export type StepStatus = "pending" | "running" | "completed" | "failed";
 
 export interface RunStep {
   id: string
+  args: string[]
   label: string
   status: StepStatus
   logs: string[]

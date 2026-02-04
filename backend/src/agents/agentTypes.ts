@@ -48,6 +48,7 @@ export interface PlanStep {
   id: string              // command (npm | pnpm | yarn)
   args: string[]          // command arguments
   label: string
+  tools: string[]
   canFail?: boolean
 }
 
@@ -60,7 +61,7 @@ export interface AgentResult<T> {
 
   /** Agent output (plans, patches, etc.) */
   output?: T
-
+  meta?: any
   /** Failure reason (never thrown) */
   reason?: string
 }

@@ -1,7 +1,9 @@
+import 'dotenv/config'
 import express from "express"
 import cors from "cors"
 import { env } from "../config/env"
 import runsRouter from "./routes/runs"
+
 
 export function startServer() {
   const app = express()

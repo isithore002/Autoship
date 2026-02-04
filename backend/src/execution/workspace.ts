@@ -1,9 +1,14 @@
 import fs from "fs"
 import path from "path"
+import { fileURLToPath } from "url"
 import { env } from "../config/env"
 
-const ROOT = path.resolve(process.cwd(), env.WORKSPACE_ROOT)
-const TEMPLATE = path.resolve(process.cwd(), "template")
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+const ROOT = path.resolve(__dirname, "..", "..", env.WORKSPACE_ROOT)
+const TEMPLATE = path.resolve(__dirname, "..", "..", "template")
+
 
 export async function createWorkspace(runId: string) {
   const dir = path.join(ROOT, runId)
